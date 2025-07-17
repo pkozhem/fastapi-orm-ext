@@ -73,15 +73,15 @@ To see what else RepositoryBase can do, visit the source code of interface Repos
 
 ## Installation
 
-```console
+```bash
 pip install fastapi-orm-ext
 ```
 or
-```console
+```bash
 uv add fastapi-orm-ext
 ```
 or
-```
+```bash
 poetry add fastapi-orm-ext
 ```
 etc
@@ -94,24 +94,24 @@ etc
 
 ## Contribution
 Install repository:
-```console
+```bash
 https://github.com/pkozhem/fastapi-orm-ext.git
 ```
 
 Create virtual environment, activate it and install dependencies:
-```console
+```bash
 uv venv
 source .venv/bin/activate
 uv sync
 ```
 
 Create new branch from actual tag:
-```console
+```bash
 git checkout <tag>
 git branch pull-<fix, feat, impr>: Short branch desc
 ```
 
 Pull your changes and create pull request:
-```console
+```bash
 git pull origin <your_branch_name>
 ```
