@@ -27,7 +27,7 @@ class Table(TableBase, DeclarativeBase):
 
 class User(Table, DeclarativeBase):
     name: Mapped[str] = mapped_column(nullable=False)
-    surnname: Mapped[str] = mapped_column(nullable=True)
+    surnname: Mapped[str | None] = mapped_column(nullable=True)
 ```
 
 TableBase consists of four mixins:

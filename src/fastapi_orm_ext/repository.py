@@ -60,7 +60,7 @@ class IBaseRepository[ConcreteTable: TableBase](ABC):
 class BaseRepositoryBase[ConcreteTable: TableBase](IBaseRepository[ConcreteTable], ABC):
     """Base class for SQLAlchemy repository."""
 
-    model: ConcreteTable
+    model: type[ConcreteTable]
     auto_commit: bool
     auto_flush: bool
 
@@ -82,7 +82,7 @@ class BaseRepositoryBase[ConcreteTable: TableBase](IBaseRepository[ConcreteTable
 class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable], ABC):
     """Base class for all SQLAlchemy repositories."""
 
-    model: ConcreteTable
+    model: type[ConcreteTable]
     auto_commit: bool = False
     auto_flush: bool = True
 
