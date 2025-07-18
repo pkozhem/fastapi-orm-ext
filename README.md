@@ -6,10 +6,26 @@
 -----
 
 ## Table of Contents
-- [About](#About)
 - [Installation](#installation)
+- [About](#About)
 - [License](#license)
 - [Contribution](#contribution)
+
+
+## Installation
+```bash
+pip install fastapi-orm-ext
+```
+or
+```bash
+uv add fastapi-orm-ext
+```
+or
+```bash
+poetry add fastapi-orm-ext
+```
+etc
+
 
 ## About
 This library provides preset base class for your tables and repositories.
@@ -43,7 +59,7 @@ from pydantic import BaseModel
 
 from app.tables import User
 # the variant to get async session
-from app.utils import get_async_session()
+from app.utils import async_session
 
 
 class CreateUserSchema(BaseModel):
@@ -79,24 +95,8 @@ print(res)
 
 To see what else RepositoryBase can do, visit the source code of interface RepositoryBase inheriting from
 
-## Installation
-
-```bash
-pip install fastapi-orm-ext
-```
-or
-```bash
-uv add fastapi-orm-ext
-```
-or
-```bash
-poetry add fastapi-orm-ext
-```
-etc
-
 
 ## License
-
 `fastapi-orm-ext` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
 
 
