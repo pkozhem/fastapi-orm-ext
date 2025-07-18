@@ -27,7 +27,7 @@ class Table(TableBase, DeclarativeBase):
 
 class User(Table, DeclarativeBase):
     name: Mapped[str] = mapped_column(nullable=False)
-    surnname: Mapped[str | None] = mapped_column(nullable=True)
+    email: Mapped[str | None] = mapped_column(nullable=True)
 ```
 
 TableBase consists of four mixins:
@@ -48,7 +48,7 @@ from app.utils import get_async_session()
 
 class CreateUserSchema(BaseModel):
     name: str
-    surname: str | None
+    email: str | None
 
 
 class UserRepository(RepositoryBase[User]):
@@ -58,14 +58,22 @@ class UserRepository(RepositoryBase[User]):
     auto_flush = True
     auto_commit = False
 
+    # there you can define your methods
+    def get_by_email(self, email: str) -> User | None:
+        return (
+            await self.session.execute(
+                statement=select(self.model).where(self.model.email == email),
+            )
+        ).scalar()
+
 # initialize UserRepository
 repo = UserRepository(async_session)
-# create new record in user table with name Bob and surname NULL
-data = CreateUserSchema(name="Bob")
+# create new record in users table
+data = CreateUserSchema(name="Bob", email="bob@gmail.com")
 await repo.create(data)
 
-# get all records in User table - in our case only Bob
-res: list[User] = await repo.all()
+# get record in users table by Bob's email
+res: list[User] = await repo.get_by_email("bob@gmail.com")
 print(res)
 ```
 
