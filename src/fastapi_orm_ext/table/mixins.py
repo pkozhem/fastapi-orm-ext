@@ -1,16 +1,12 @@
 import re
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING
 from uuid import uuid4
 
+from pydantic import UUID4
 from sqlalchemy import TIMESTAMP, MetaData
 from sqlalchemy.orm import Mapped, declarative_mixin, declared_attr, mapped_column
 
 from fastapi_orm_ext.table.sqltypes import UUIDIndependent
-
-if TYPE_CHECKING:
-    from pydantic import UUID4
-
 
 __all__ = (
     "NameConventionMixin",
@@ -81,7 +77,7 @@ class UUIDPrimaryKeyMixin:
 
     __abstract__: bool = True
 
-    id: Mapped["UUID4"] = mapped_column(
+    id: Mapped[UUID4] = mapped_column(
         UUIDIndependent,
         primary_key=True,
         index=True,

@@ -27,6 +27,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest",
+    "pytest-asyncio",
+    "aiosqlite",
     "ruff",
     "ipython",
 ]
@@ -55,14 +57,20 @@ parallel = true
 omit = ["src/fastapi_orm_ext/__about__.py"]
 
 [tool.coverage.paths]
-fastapi_orm_ext = ["src/fastapi_orm_ext", "*/fastapi-orm-ext/src/fastapi_orm_ext"]
-tests = ["tests", "*/fastapi-orm-ext/tests"]
+fastapi_orm_ext = [
+    "src/fastapi_orm_ext",
+    "*/fastapi-orm-ext/src/fastapi_orm_ext",
+]
+tests = [
+    "tests",
+    "*/fastapi-orm-ext/tests",
+]
 
 [tool.coverage.report]
 exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
+    "no cov",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
 ]
 
 [tool.ruff]
@@ -77,27 +85,27 @@ include = [
 ]
 exclude = [
     "**/.venv",
-    "test*",
+    # "test*",
 ]
 
 [tool.ruff.lint]
 select = [
-    "ALL"
+    "ALL",
 ]
 ignore = [
-    "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in `*args`
-    "B008",    # do not perform function calls in argument defaults
-    "B024",    # abstract base class, but it has no abstract methods or properties
-    "COM812",  # Ruff formatter recommeds to desable this rule
-    "D",       # pydocstyle
-    "E501",    # line too long, handled by ruff
-    "FA102",   # Missing `from __future__ import annotations`
-    "FIX002",  # Line contains TODO, consider resolving the issue
-    "RET504",  # Unnecessary assignment before return
-    "RUF100",  # Unused noqa directive
-    "RUF102",  # Invalid rule code in # noqa: {}
-    "TC002",   # Move third-party import into a type-checking block
-    "TD002",   # Missing author in TODO
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in `*args`
+    "B008",   # do not perform function calls in argument defaults
+    "B024",   # abstract base class, but it has no abstract methods or properties
+    "COM812", # Ruff formatter recommeds to desable this rule
+    "D",      # pydocstyle
+    "E501",   # line too long, handled by ruff
+    "FA102",  # Missing `from __future__ import annotations`
+    "FIX002", # Line contains TODO, consider resolving the issue
+    "RET504", # Unnecessary assignment before return
+    "RUF100", # Unused noqa directive
+    "RUF102", # Invalid rule code in # noqa: {}
+    "TC002",  # Move third-party import into a type-checking block
+    "TD002",  # Missing author in TODO
 ]
 
 

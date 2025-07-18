@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
     from sqlalchemy.sql.selectable import ForUpdateParameter
 
-__all__= ("RepositoryBase",)
+__all__ = ("RepositoryBase",)
 
 UpdateSchema = BaseModel
 CreateSchema = BaseModel
@@ -37,7 +37,7 @@ class IBaseRepository[ConcreteTable: TableBase](ABC):
         """Get instance by ID."""
 
     @abstractmethod
-    async def all(self) -> "Sequence[ConcreteTable] | None":
+    async def all(self) -> list[ConcreteTable]:
         """Get all instances from table."""
 
     @abstractmethod
@@ -45,7 +45,7 @@ class IBaseRepository[ConcreteTable: TableBase](ABC):
         """Create new instance in table."""
 
     @abstractmethod
-    async def bulk_create(self, schema: "Sequence[CreateSchema]") -> "Sequence[ConcreteTable]":
+    async def bulk_create(self, schema: "Sequence[CreateSchema]") -> list[ConcreteTable]:
         """Create new instances in table."""
 
     @abstractmethod
@@ -133,8 +133,8 @@ class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable]
         ).scalar()
 
     @override
-    async def all(self) -> "Sequence[ConcreteTable] | None":
-        return (
+    async def all(self) -> list[ConcreteTable]:
+        res: Sequence[ConcreteTable] = (
             (
                 await self.session.execute(
                     statement=select(self.model),
@@ -143,6 +143,7 @@ class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable]
             .scalars()
             .all()
         )
+        return list(res) if res else []
 
     @override
     async def create(self, schema: CreateSchema) -> ConcreteTable:
@@ -154,7 +155,7 @@ class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable]
         return instance
 
     @override
-    async def bulk_create(self, schema: "Sequence[CreateSchema]") -> "Sequence[ConcreteTable]":
+    async def bulk_create(self, schema: "Sequence[CreateSchema]") -> list[ConcreteTable]:
         instances: list[ConcreteTable] = [self.model(**self._get_create_data(schema=model)) for model in schema]
         self.session.add_all(instances=instances)
 
