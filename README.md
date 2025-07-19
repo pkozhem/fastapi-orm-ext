@@ -41,7 +41,7 @@ class Table(TableBase, DeclarativeBase):
     __abstract__: bool = True
 
 
-class User(Table, DeclarativeBase):
+class User(Table):
     name: Mapped[str] = mapped_column(nullable=False)
     email: Mapped[str | None] = mapped_column(nullable=True)
 ```
