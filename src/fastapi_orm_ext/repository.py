@@ -124,8 +124,6 @@ class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable]
 
     @override
     async def get(self, id_: "str | UUID4") -> ConcreteTable | None:
-        """Get instance by ID."""
-
         return (
             await self.session.execute(
                 statement=select(self.model).where(self.model.id == id_),
@@ -149,9 +147,9 @@ class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable]
     async def create(self, schema: CreateSchema) -> ConcreteTable:
         data: dict[str, Any] = self._get_create_data(schema=schema)
         instance: ConcreteTable = self.model(**data)
-        self.session.add(instance)
+        self.session.add(instance=instance)
         await self.commit()
-        await self.refresh(instance)
+        await self.refresh(instance=instance)
         return instance
 
     @override
@@ -177,7 +175,7 @@ class RepositoryBase[ConcreteTable: TableBase](BaseRepositoryBase[ConcreteTable]
             setattr(instance, k, v)
 
         await self.commit()
-        await self.refresh(instance)
+        await self.refresh(instance=instance)
 
         return instance
 

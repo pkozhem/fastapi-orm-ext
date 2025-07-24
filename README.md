@@ -47,10 +47,12 @@ class User(Table):
 ```
 
 TableBase consists of four mixins:
-- NameConventionMixin: handle name convention;
+- NameConventionMixin: handles name convention;
 - TableNameMixin: takes model's class name and convert it to snake case, use this name while creating table in DB;
 - TimestampsMixin: handles when record was created and updated;
 - UUIDPrimaryKeyMixin: makes PK of UUID4 type.
+
+If you don't need one or more of following mixins, create your own TableBase.
 
 #### Use Repository like so:
 ```python
