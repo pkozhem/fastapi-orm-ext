@@ -76,16 +76,16 @@ exclude_lines = [
 [tool.ruff]
 target-version = "py313"
 fix = true
-src = ["app"]
+src = ["src"]
 line-length = 120
 indent-width = 4
 include = [
-    "app/**/*.py",
+    "src/**/*.py",
+    "tests/**/*.py",
     "*.py",
 ]
 exclude = [
     "**/.venv",
-    # "test*",
 ]
 
 [tool.ruff.lint]
@@ -106,8 +106,8 @@ ignore = [
     "RUF102", # Invalid rule code in # noqa: {}
     "TC002",  # Move third-party import into a type-checking block
     "TD002",  # Missing author in TODO
+    "S101",   # Magic value used in comparison
 ]
-
 
 [tool.ruff.format]
 quote-style = "double"

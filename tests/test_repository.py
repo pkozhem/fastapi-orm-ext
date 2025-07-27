@@ -2,11 +2,11 @@ from typing import TYPE_CHECKING
 from uuid import uuid4
 
 import pytest
-from fastapi_orm_ext.errors import ObjectNotFoundError
-from fastapi_orm_ext.repository import RepositoryBase
 from pydantic import UUID4, BaseModel
 from sqlalchemy.orm import Mapped, mapped_column
 
+from fastapi_orm_ext.errors import ObjectNotFoundError
+from fastapi_orm_ext.repository import RepositoryBase
 from tests.conftest import Table
 
 if TYPE_CHECKING:
@@ -162,7 +162,7 @@ class TestRepository:
 
         _: list[RepositoryTestTable] = await repository.bulk_create(schema=create_data)
 
-        assert len(await repository.all()) == 2
+        assert len(await repository.all()) == 2  # noqa: PLR2004
 
     async def test_all(self, session: "AsyncSession") -> None:
         """Test if all records can be retrieved with the repository."""
@@ -176,4 +176,4 @@ class TestRepository:
 
         instances: list[RepositoryTestTable] = await repository.all()
 
-        assert len(instances) == 2
+        assert len(instances) == 2  # noqa: PLR2004

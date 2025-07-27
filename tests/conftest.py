@@ -1,9 +1,10 @@
 from typing import TYPE_CHECKING
 
 import pytest_asyncio
-from fastapi_orm_ext.table import TableBase
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
+
+from fastapi_orm_ext.table import TableBase
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
