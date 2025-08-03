@@ -62,12 +62,12 @@ jobs:
         run: hatch build
 
       - name: Verify build artifacts
+        shell: bash
         run: |
           echo "Generated artifacts:"
-          ls -la dist || dir dist
-
-          files=$(ls -A dist 2>/dev/null | wc -l)
-          if [ "$files" -eq 0 ]; then
+          ls -la dist
+          files=$(ls -A dist | wc -l)
+          if [ $files -eq 0 ]; then
             echo "Error: No artifacts generated!"
             exit 1
           fi
