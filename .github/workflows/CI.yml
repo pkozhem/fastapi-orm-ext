@@ -37,7 +37,7 @@ jobs:
         env:
           UV_THREADPOOL_SIZE: 4
 
-  build-and-publish-check:
+  hatch-build-check:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
