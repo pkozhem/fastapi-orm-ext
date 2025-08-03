@@ -32,6 +32,7 @@ jobs:
       - name: Install dependencies with uv
         run: |
           uv sync
+          source .venv/bin/activate
 
       - name: Run tests
         run: |
